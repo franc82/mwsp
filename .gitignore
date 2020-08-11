@@ -1,4 +1,5 @@
 .minified
+.sqlite
 .externalToolBuilders/
 .tags
 ICONS
