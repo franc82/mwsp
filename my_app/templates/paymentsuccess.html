@@ -1,0 +1,5 @@
+{% extends "resultbase.html" %}
+
+{% block resultheader %}
+<h2>Thanks for the payment! <a target="_blank" href="{{ url_for('catalog.seatingpdf', sessionid=sessionid) }}">Get as PDF</a></h2>
+{% endblock %}

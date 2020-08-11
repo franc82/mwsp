@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %} {{ title }}{% endblock %}
+{% block body %}
+<div class="container" >
+    <div class="well">
+      <!--<h2 class="title">Contact Us</h2>-->
+        <p>Got a question? Need help? Use the form below to contact us.
+            We are usually pretty quick to reply, but responses could take up to 8 hours.
+        </p>
+        {% if success %}
+        <div class="alert alert-success">Thanks, your message has been sent.</div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-8">
+              <form method="POST" action="{{ url_for('catalog.contact') }}" name="contact" role="form">
+                  <fieldset>
+                      <legend class="text-center header">Contact Us</legend>
+                      <div class="form-group">
+                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                        <div class="col-md-8">
+                            {{ form.name.label }}: {{ form.name(size=20, class='form-control', id='name', placeholder='First Name') }}
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
+                        <div class="col-md-8">
+                           {{ form.email.label }}: {{ form.email(id="email", placeholder="Email Address", class="form-control") }}
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-pencil-square-o bigicon"></i></span>
+                        <div class="col-md-8">
+                           {{ form.message.label }}: {{ form.message(class="form-control", id="message",  placeholder="Enter your massage for us here. We will get back to you within 2 business days.", rows="7") }}
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-md-12 text-center">
+                            {{ form.submit(class="btn btn-primary btn-lg") }}
+                        </div>
+                      </div>
+                  </fieldset>
+              </form>
+            </div>
+            <div class="col-md-4">
+                <p>About Us</p>
+                <p></p>
+                <address>
+                  <strong>My Wedding Seating Planner</strong><br>
+                    BahamSoft Ltd <br>
+                    28b Princes Street<br>
+                    Cork<br>
+                    Ireland
+                </address>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

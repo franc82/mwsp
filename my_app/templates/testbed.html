@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai Dweeding</title>
+    <link rel="stylesheet" href="assets/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/slick-1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-default ai-navigation container" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <img src="assets/images/logo.png" class="" alt="Brand Logo">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Faq</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li class="ai-seating-plan-button"><a href="#"><button>Get Seating Plan</button></a></li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </nav>
+    </header>
+
+    <section class="ai-guest-banner">
+        <div class="container">
+            <div class="ai-guest-banner-heading">
+                <h1>Seating Plan</h1>
+                <p>se our wedding table planner tool to arrange the layout of your <br>reception tables and create your seating plan</p>
+            </div>
+            <div class="ai-guest-banner-content">
+                <div class="ai-guest-banner-content-timeline">
+                    <div class="ai-guest-banner-content-timeline-step completed"><span>&#10003;</span></div>
+                    <div class="ai-guest-banner-content-timeline-step completed"><span>&#10003;</span></div>
+                    <div class="ai-guest-banner-content-timeline-step current"><span>&#9675;</span></div>
+                </div>
+                <div class="ai-guest-banner-content-timeline-label">
+                    <div class="ai-guest-banner-content-timeline-step-label">Basic Info</div>
+                    <div class="ai-guest-banner-content-timeline-step-label">Guest Details</div>
+                    <div class="ai-guest-banner-content-timeline-step-label">Review Guests</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ai-add-guest ai-review-page">
+        <div class="container">
+            <div class="ai-add-guest-form">
+                <div class="ai-add-guest-form-header">
+                    <h3>Guest Details</h3>
+                    <p>We need to know more about your Guests</p>
+                    <div class="ai-heading-cards row">
+                        <div class="col-md-4">
+                            <div class="ai-detail-card">
+                                <p>Number of <br>Guests</p>
+                                <h5>44</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="ai-detail-card">
+                                <p>Number of <br>Tables</p>
+                                <h5>12</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="ai-detail-card">
+                                <p>Minimum Number of Guest for Table</p>
+                                <h5>2</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-add-guest-form-content">
+
+                    <table class="table table-responsive-md table-striped text-center ai-guest-list">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Guest Name</th>
+                                <th class="text-center">Guest relationship</th>
+                                <th class="text-center">Acquaintance</th>
+                                <th class="text-center"><span>Actions</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="pt-3-half ai-name" contenteditable="false" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-acquaintance">Aurelidsa Vega</td>
+                                <td class="pt-3-half ai-relation" contenteditable="false">Father</td>
+                                <td class="pt-3-half ai-acquaintance" contenteditable="false">Bride</td>
+                                <td class="pt-3-half ai-actions" contenteditable="false">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-modal"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half ai-name" contenteditable="false" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-acquaintance">Guerra Costez</td>
+                                <td class="pt-3-half ai-relation" contenteditable="false"></td>
+                                <td class="pt-3-half ai-acquaintance" contenteditable="false"></td>
+                                <td class="pt-3-half ai-actions" contenteditable="false">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-modal"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half ai-name" contenteditable="false" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-acquaintance">Guadasdfe House</td>
+                                <td class="pt-3-half ai-relation" contenteditable="false">Father</td>
+                                <td class="pt-3-half ai-acquaintance" contenteditable="false">Groom</td>
+                                <td class="pt-3-half ai-actions" contenteditable="false">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-modal"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half ai-name" contenteditable="false" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-acquaintance">Housewerdalupe</td>
+                                <td class="pt-3-half ai-relation" contenteditable="false">Father</td>
+                                <td class="pt-3-half ai-acquaintance" contenteditable="false">Groom</td>
+                                <td class="pt-3-half ai-actions" contenteditable="false">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-modal"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half ai-name" contenteditable="false" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-acquaintance">Geralupeouse</td>
+                                <td class="pt-3-half ai-relation" contenteditable="false">Father</td>
+                                <td class="pt-3-half ai-acquaintance" contenteditable="false">Groom</td>
+                                <td class="pt-3-half ai-actions" contenteditable="false">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-modal"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half ai-name" contenteditable="false" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-acquaintance">Uadasdlupe</td>
+                                <td class="pt-3-half ai-relation" contenteditable="false">Father</td>
+                                <td class="pt-3-half ai-acquaintance" contenteditable="false">Groom</td>
+                                <td class="pt-3-half ai-actions" contenteditable="false">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-modal"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half ai-name" contenteditable="false" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-acquaintance">Vesdga</td>
+                                <td class="pt-3-half ai-relation" contenteditable="false">Father</td>
+                                <td class="pt-3-half ai-acquaintance" contenteditable="false">Bride</td>
+                                <td class="pt-3-half ai-actions" contenteditable="false">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-modal"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half ai-name" contenteditable="false" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-acquaintance"> Cortesdz</td>
+                                <td class="pt-3-half ai-relation" contenteditable="false"></td>
+                                <td class="pt-3-half ai-acquaintance" contenteditable="false"></td>
+                                <td class="pt-3-half ai-actions" contenteditable="false">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-modal"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half ai-name" contenteditable="false" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-acquaintance">Guadaflupe Hou2se</td>
+                                <td class="pt-3-half ai-relation" contenteditable="false">Father</td>
+                                <td class="pt-3-half ai-acquaintance" contenteditable="false">Groom</td>
+                                <td class="pt-3-half ai-actions" contenteditable="false">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-modal"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half ai-name" contenteditable="false" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-acquaintance">Hfuse Guadalsdfsupe</td>
+                                <td class="pt-3-half ai-relation" contenteditable="false">Father</td>
+                                <td class="pt-3-half ai-acquaintance" contenteditable="false">Groom</td>
+                                <td class="pt-3-half ai-actions" contenteditable="false">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-modal"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half ai-name" contenteditable="false" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-acquaintance">DFupepe House</td>
+                                <td class="pt-3-half ai-relation" contenteditable="false">Father</td>
+                                <td class="pt-3-half ai-acquaintance" contenteditable="false">Groom</td>
+                                <td class="pt-3-half ai-actions" contenteditable="false">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-modal"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half ai-name" contenteditable="false" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-acquaintance">UDSFadHouse</td>
+                                <td class="pt-3-half ai-relation" contenteditable="false">Father</td>
+                                <td class="pt-3-half ai-acquaintance" contenteditable="false">Groom</td>
+                                <td class="pt-3-half ai-actions" contenteditable="false">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-modal"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="ai-guest-detail-modal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="ai-preloader"><i class="fa fa-spinner fa-spin"></i></div>
+                                <div class="modal-body">
+                                    <div class="heading text-center">
+                                        <h2>Editing Guest : <span></span></h2>
+                                        <p>Please Click Below To Edit The Guest Details <br>And Click On The Save Button.</p>
+                                    </div>
+                                    <div class="form">
+                                        <div class="ai-selected-guests">
+                                            <div class="ai-selected-guest-pill"><span>ahmad</span> <i class="fa fa-times"></i></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group ai-modal-guest-list-after">
+                                                    <label for="guests">Relationship</label>
+                                                    <div id="ai-modal-guest-list"> -->
+                                                        <!--Rendered Form jQuery And For Later Ajax -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="guests">Name</label>
+                                                    <input type="text" id="ai-guest-relationship" name="" class="form-control" placeholder="Enter Your Relationship">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="guests">Acquaintance</label>
+                                                    <select name="" id="ai-guest-acquaintance" class="form-control" >
+                                                        <option value="both">Both</option>
+                                                        <option value="Bride">Bride</option>
+                                                        <option value="Groom">Groom</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ai-modal-actions pull-right">
+                                            <button class="ai-modal-update-guest ai-ok">Save</button>
+                                            <button class="ai-modal-update-guest ai-cancel">Delete</button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ai-guest-detail-acquaintance" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="ai-preloader"><i class="fa fa-spinner fa-spin"></i></div>
+                                <div class="modal-body">
+                                    <div class="heading">
+                                        <h4 class="ai-modal-acquaintance">Acquaintance:  <span></span></h4>
+                                        <h4 class="ai-modal-name">Name:  <span></span></h4>
+                                        <h4 class="ai-modal-relation">Relationship:  <span></span></h4>
+                                    </div>
+                                    <hr>
+                                    <div class="ai-modal-content">
+                                        <div class="ai-modal-content-append form">
+                                            <div class=""></div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="ai-modal-actions pull-right">
+                                        <button class="ai-modal-update-guest ai-ok">Assign</button>
+                                        <button class="ai-modal-update-guest ai-cancel">Delete</button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-add-guest-form-action">
+                <a href="guest.html"><button class="pull-left ai-add-guest-form-action-back">Back</button></a>
+                <form action="seating plan.html">
+                    <button class="pull-right ai-add-guest-form-action-next">Genrate Sitting Plan</button>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="ai-footer">
+        <div class="container">
+            <div class="ai-footer-social">
+                <a class="ai-navbar-brand" href="index.html">
+                    <img src="assets/images/logo.png" class="" alt="Brand Logo">
+                </a>
+                <div class="ai-social">
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="ai-footer-nav">
+            <div class="container">
+                <ul class="pull-left nav">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="pull-right">
+                    <p class="ui-copyrights-text">Copyright 2020 Waleed   |   All Rights Reserved</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/jQuery/jquery-3.5.1.min.js"></script>
+    <script src="assets/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="assets/slick-1.8.1/slick/slick.min.js"></script>
+    <script src="assets/script.js"></script>
+</body>
+</html>

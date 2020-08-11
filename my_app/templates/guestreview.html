@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% block title %} {{ title }}{% endblock %}
+{% block body %}
+<section class="ai-guest-banner">
+        <div class="container">
+            <div class="ai-guest-banner-heading">
+                <h1>Review Guests</h1>
+                <!--<p>se our wedding table planner tool to arrange the layout of your <br>reception tables and create your seating plan</p>-->
+            </div>
+            <div class="ai-guest-banner-content">
+                <div class="ai-guest-banner-content-timeline">
+                    <div class="ai-guest-banner-content-timeline-step completed"><span>&#10003;</span></div>
+                    <div class="ai-guest-banner-content-timeline-step completed"><span>&#10003;</span></div>
+                    <div class="ai-guest-banner-content-timeline-step current"><span>&#9675;</span></div>
+                </div>
+                <div class="ai-guest-banner-content-timeline-label">
+                    <div class="ai-guest-banner-content-timeline-step-label">Basic Info</div>
+                    <div class="ai-guest-banner-content-timeline-step-label">Guest Details</div>
+                    <div class="ai-guest-banner-content-timeline-step-label">Review Guests</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="ai-add-guest ai-review-page">
+        <div class="container">
+            <div class="ai-add-guest-form">
+                <div class="ai-add-guest-form-header">
+                    <h3>Guest Details</h3>
+                    <p>Please provide more information about your guests by clicking on the pencil icon in the action section of each guest row. </p>
+                    <div class="ai-heading-cards row">
+                        <div class="col-md-4">
+                            <div class="ai-detail-card">
+                                <p>Number of <br>Guests</p>
+                                <h5>{{ guests.numguests }}</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="ai-detail-card">
+                                <p>Number of <br>Tables</p>
+                                <h5>{{ guests.numtables }}</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="ai-detail-card">
+                                <p>Guests per Table</p>
+                                <h5>{{ guests.numguestspertable }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-add-guest-form-content">
+                    <div class="pull-left">
+                        <p>{{ guests.numguests }} guests, rendering {{ guests.gueststartnum }} up to {{ guests.guestendnum }}</p>
+                    </div>
+                    <div class="pull-right">
+                        <ul class="pagination">
+                            {% if guests.hasprev %}
+                            <li class="page-item">
+                            {% else %}
+                            <li class="page-item disabled">
+                            {% endif %}
+                              <a class="page-link" tabindex="-1" href="{{ url_for(request.endpoint, page=guests.prevpagenum) }}">Previous</a>
+                            </li>
+                            {% if guests.hasnext %}
+                            <li class="page-item">
+                            {% else %}
+                            <li class="page-item disabled">
+                            {% endif %}
+                              <a class="page-link" href="{{ url_for(request.endpoint, page=guests.nextpagenum) }}">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ai-add-guest-form-content">
+                    <table class="table table-responsive-md table-striped text-center ai-guest-list">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Guest Name</th>
+                                <th class="text-center">Guest relationship</th>
+                                <th class="text-center">Acquaintance</th>
+                                <th class="text-center"><span>Actions</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for guest in guests.guestlist %}
+                            <tr id="{{ guest.id }}">
+                                <td class="pt-3-half ai-name" contenteditable="false">{{ guest.name }}</td>
+                                <td class="pt-3-half ai-relation" contenteditable="false">
+                                    {% if guests.friendlookup[guest.id]|length > 0 %}
+                                      {{ guests.friendlookup[guest.id]|join(', ') }}
+                                    {% else %}
+                                      (None)
+                                    {% endif %}
+                                </td>
+                                <td class="pt-3-half ai-acquaintance" contenteditable="false">
+                                    {% if guest.acq %}
+                                      {{ guest.acq }}
+                                    {% else %}
+                                      (None)
+                                    {% endif %}
+                                </td>
+                                <td class="pt-3-half ai-actions" contenteditable="false">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#ai-guest-detail-modal"></i>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="ai-guest-detail-modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="ai-preloader"><i class="fa fa-spinner fa-spin"></i></div>
+                        <div class="modal-body">
+                            <div class="heading text-center">
+                                <h2>Editing Guest : <span></span></h2>
+                                <p>Please Click Below To Edit The Guest Details <br>And Click On The Save Button.</p>
+                            </div>
+                            <div class="form">
+                                <div class="ai-selected-guests">
+                                    <!--<div class="ai-selected-guest-pill"><span>ahmad</span> <i class="fa fa-times"></i></div>-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group ai-modal-guest-list-after">
+                                            <label for="ai-modal-guest-list">Relationship</label>
+                                            <div id="ai-modal-guest-list"> -->
+                                                <!--Rendered Form jQuery And For Later Ajax -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="ai-guest-name">Name</label>
+                                            <input type="text" id="ai-guest-name" name="ai-guest-name" class="form-control" placeholder="Enter Your Relationship">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="ai-guest-acquaintance">Acquaintance</label>
+                                            <select name="ai-guest-acquaintance" id="ai-guest-acquaintance" class="form-control">
+                                                <option value="">None (default)</option>
+                                                <!--<option value="Both">Both</option>-->
+                                                <option value="Bride">Bride</option>
+                                                <option value="Groom">Groom</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ai-modal-actions pull-right">
+                                    <button class="ai-modal-update-guest ai-ok">Save</button>
+                                    <button class="ai-modal-update-guest ai-cancel">Delete</button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-add-guest-form-action">
+                <a href="{{ url_for('catalog.step2') }}"><button class="pull-left ai-add-guest-form-action-back">Back</button></a>
+                <form action="{{ url_for('catalog.results') }}">
+                    <button class="pull-right ai-add-guest-form-action-next">Generate Sitting Plan</button>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

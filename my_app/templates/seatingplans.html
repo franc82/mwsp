@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %} {{ title }}{% endblock %}
+{% block body %}
+<section>
+    <div class="container">
+        <p><b>{{ total }} seating plans have been generated so far</b></p>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Session ID</th>
+                <th>Date</th>
+                <th>Solution</th>
+                <th>Session Data</th>
+                <th>PDF link</th>
+            </tr>
+    {% for seatingplan in seatingplans.items %}
+      <tr>
+            <td>{{ seatingplan.id }} </td>
+            <td>{{ seatingplan.sessionid }}</td>
+            <td>{{ seatingplan.solutiondate.strftime('%c') }} </td>
+            <td>
+                <ul>
+                {% for table in seatingplan.solution %}
+                    <li>{{ table }} ({{ seatingplan.solution[table]|length }})</li>
+                {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li>User ID: {{ seatingplan.sessiondata['user_id'] }}</li>
+                    <li>User Agent: {{ seatingplan.sessiondata['user_agent'] }}</li>
+                    <li>IP: {{ seatingplan.sessiondata['ip'] }}</li>
+                    <li>Min guest/table: {{ seatingplan.sessiondata['config']['minguestpertable'] }}</li>
+                    <li>Num tables: {{ seatingplan.sessiondata['config']['numtables'] }}</li>
+                    <li>Guest list size: {{ seatingplan.sessiondata['guestlist']|length }}</li>
+                </ul>
+            </td>
+            <td>
+                <a target="_blank" href="{{ url_for('catalog.seatingpdf', sessionid=seatingplan.sessionid) }}">Get as PDF</a>
+            </td>
+      </tr>
+    {% endfor %}
+        </table>
+    {% if seatingplans.has_prev %}
+      <a href="{{ url_for(request.endpoint, page=seatingplans.prev_num) }}">
+        {{"<< Previous Page"}}
+      </a>
+    {% else %}
+      {{"<< Previous Page"}}
+    {% endif %} |
+    {% if seatingplans.has_next %}
+      <a href="{{ url_for(request.endpoint, page=seatingplans.next_num) }}">
+        {{"Next page >>"}}
+      </a>
+    {% else %}
+      {{"Next page >>"}}
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

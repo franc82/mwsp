@@ -1,0 +1,47 @@
+.minified
+.externalToolBuilders/
+.tags
+ICONS
+NEW\ ICONS
+new\ icons
+Thumbs.db
+*.sw[mnop]
+*.js.min.*
+*.css.map
+*.sql
+*.pyc
+!EXCLUDED/db/migrations/*.sql
+.rbenv-version
+.settings
+.project
+.buildpath
+tmp
+inc/configuration.php
+.phpunit.result.cache
+# Mac
+.DS_Store
+._.DS_Store
+# Windows
+Thumbs.db
+# NetBeans
+nbproject
+# Eclipse
+.project
+.idea
+# temporary Thu 26 Mar 2020 11:34:33 UTC @@@ jbw:
+public/inc/configuration.php
+#----------------------------------------------------------------------
+#laravel gitignore's:
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+tests/_*

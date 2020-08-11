@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+{% block title %} {{ title }}{% endblock %}
+{% block body %}
+<section class="container">
+    <h1>Frequently Asked Questions</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Getting Started</h3>
+                <div class="panel-group" id="faqAccordion">
+                    <div class="panel panel-default ">
+                        <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse"
+                             data-parent="#faqAccordion" data-target="#question0">
+                            <h4 class="panel-title">
+                                <a href="#" class="ing">Q: What does MyWeddingSeatingPlanner.com do?</a>
+                            </h4>
+
+                        </div>
+                        <div id="question0" class="panel-collapse collapse" style="height: 0px;">
+                            <div class="panel-body">
+                                <h5><span class="label label-primary">Answer</span></h5>
+                                <p><a href="{{ url_for('catalog.home') }}">MyWeddingSeatingPlanner.com</a> is a webapp that makes it easy for you to create a seating plan for your wedding guests.
+                                    It removes the regular technical hassles of setting up and maintaining a seating plan.
+                                    It's easy to use and you don't need to know anything about programming or web design.
+                                    With <a href="{{ url_for('catalog.home') }}">MyWeddingSeatingPlanner.com</a>, you can manage a seating plan for your wedding using just a web browser.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default ">
+                        <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse"
+                             data-parent="#faqAccordion" data-target="#question1">
+                            <h4 class="panel-title">
+                                <a href="#" class="ing">Q: Is <a href="{{ url_for('catalog.home') }}">MyWeddingSeatingPlanner.com</a> really Free?</a>
+                            </h4>
+
+                        </div>
+                        <div id="question1" class="panel-collapse collapse" style="height: 0px;">
+                            <div class="panel-body">
+                                <h5><span class="label label-primary">Answer</span></h5>
+
+                                <p>Yes! There are no catches - our free plan is completely free!
+                                    It's not a trial and it doesn't expire.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default ">
+                        <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse"
+                             data-parent="#faqAccordion" data-target="#question2">
+                            <h4 class="panel-title">
+                                <a href="#" class="ing">Q: How do I install <a href="{{ url_for('catalog.home') }}">MyWeddingSeatingPlanner.com</a></a>
+                            </h4>
+
+                        </div>
+                        <div id="question2" class="panel-collapse collapse" style="height: 0px;">
+                            <div class="panel-body">
+                                <h5><span class="label label-primary">Answer</span></h5>
+
+                                <p>There’s no installation required! We host <a href="{{ url_for('catalog.home') }}">MyWeddingSeatingPlanner.com</a>
+                                    so you don’t have to worry about installing or upgrading any software.
+                                    You only need a modern web browser such as Firefox, Google Chrome or Safari and you’re ready to go.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default ">
+                        <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse"
+                             data-parent="#faqAccordion" data-target="#question200">
+                            <h4 class="panel-title">
+                                <a href="#" class="ing">Q: What do I need to get started ?</a>
+                            </h4>
+
+                        </div>
+                        <div id="question200" class="panel-collapse collapse" style="height: 0px;">
+                            <div class="panel-body">
+                                <h5><span class="label label-primary">Answer</span></h5>
+
+                                <p>You will need:
+                                    <ul>
+                                        <li>Your guest list</li>
+                                        <li>A modern web browser (i.e. Chrome, Firefox or Safari)</li>
+                                        <li>And optionally, a credit card, if you want to print the full seating plan of your guests.</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6">
+                <h3>General Questions</h3>
+                <div class="panel-group">
+                    <div class="panel panel-default ">
+                        <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse"
+                             data-parent="#faqAccordion" data-target="#question3">
+                            <h4 class="panel-title">
+                                <a href="#" class="ing">Q: Why <a href="{{ url_for('catalog.home') }}">MyWeddingSeatingPlanner.com</a>?</a>
+                            </h4>
+
+                        </div>
+                        <div id="question3" class="panel-collapse collapse" style="height: 0px;">
+                            <div class="panel-body">
+                                <h5><span class="label label-primary">Answer</span></h5>
+
+                                <p>
+                                    MyWeddingSeatingPlanner.com is quick, super easy to use and makes your work look as good as possible by putting it center stage.
+                                    No clutter, no programming or web knowledge is required.
+                                    MyWeddingSeatingPlanner.com takes care of all the technical hassles, allowing you to concentrate on the big event!
+                                    What's more is that MyWeddingSeatingPlanner.com is a Web app which is constantly being improved and updates get applied automatically.
+                                    We aim to make MyWeddingSeatingPlanner.com the best tool to generate a wedding seating plan and we can only do this with your feedback!
+                                    Got a feature suggestion or enhancement idea? <a href="{{ url_for('catalog.contact') }}">let us know!</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default ">
+                        <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse"
+                             data-parent="#faqAccordion" data-target="#question4">
+                            <h4 class="panel-title">
+                                <a href="#" class="ing">Q: Is MyWeddingSeatingPlanner.com secure?</a>
+                            </h4>
+
+                        </div>
+                        <div id="question4" class="panel-collapse collapse" style="height: 0px;">
+                            <div class="panel-body">
+                                <h5><span class="label label-primary">Answer</span></h5>
+
+                                <p>
+                                    Of course! We utilize industry standard Secure Socket Layer (SSL) across the entire MyWeddingSeatingPlanner.com site and admin.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default ">
+                        <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse"
+                             data-parent="#faqAccordion" data-target="#question40">
+                            <h4 class="panel-title">
+                                <a href="#" class="ing">Q: What about mobile devices?</a>
+                            </h4>
+
+                        </div>
+                        <div id="question40" class="panel-collapse collapse" style="height: 0px;">
+                            <div class="panel-body">
+                                <h5><span class="label label-primary">Answer</span></h5>
+
+                                <p>
+                                    No problem! Mobile devices such as Apple IPhones, iPads and Android devices are served an optimized version of your portfolio!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="panel panel-default ">
+                        <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse"
+                             data-parent="#faqAccordion" data-target="#question41">
+                            <h4 class="panel-title">
+                                <a href="#" class="ing">Q: Can I start with a Free plan and upgrade later?</a>
+                            </h4>
+
+                        </div>
+                        <div id="question41" class="panel-collapse collapse" style="height: 0px;">
+                            <div class="panel-body">
+                                <h5><span class="label label-primary">Answer</span></h5>
+
+                                <p>
+                                    Of course, you can upgrade or downgrade your plan at any time.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-6">
+                <h3>Billing Questions</h3>
+                <div class="panel-group">
+                    <div class="panel panel-default ">
+                        <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse"
+                             data-parent="#faqAccordion" data-target="#question5">
+                            <h4 class="panel-title">
+                                <a href="#" class="ing">Q: What's the difference between the Free and Paid accounts?</a>
+                            </h4>
+
+                        </div>
+                        <div id="question5" class="panel-collapse collapse" style="height: 0px;">
+                            <div class="panel-body">
+                                <h5><span class="label label-primary">Answer</span></h5>
+
+                                <p>
+                                    Free account holders will have a seating plan that only contain half of the tables.
+                                    A link will be provided to these users which will allow them to get the full seating plan after paying a small fee.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default ">
+                        <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse"
+                             data-parent="#faqAccordion" data-target="#question6">
+                            <h4 class="panel-title">
+                                <a href="#" class="ing">Q: How can I pay? </a>
+                            </h4>
+
+                        </div>
+                        <div id="question6" class="panel-collapse collapse" style="height: 0px;">
+                            <div class="panel-body">
+                                <h5><span class="label label-primary">Answer</span></h5>
+
+                                <p>Our Free accounts are free forever and no payment is required.
+                                    For paid accounts, you will need a Credit/Debit card of some form to pay for your Wedding Seating plan.
+                                    We accept all major brands of Credit and Debit cards including Visa, MasterCard, Maestro and American Express.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <h3>Still Wondering?</h3>
+                <div class="panel-group">
+                    <div class="panel-group">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse"
+                                 data-parent="#faqAccordion" data-target="#question7">
+                                <h4 class="panel-title">
+                                    <a href="#" class="ing">Q: I have a question which isn't answered here</a>
+                                </h4>
+
+                            </div>
+                            <div id="question7" class="panel-collapse collapse" style="height: 0px;">
+                                <div class="panel-body">
+                                    <h5><span class="label label-primary">Answer</span></h5>
+
+                                    <p>
+                                        No problem,<a href="{{ url_for('catalog.contact') }}"> please feel free to contact us here.</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default ">
+                            <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse"
+                                 data-parent="#faqAccordion" data-target="#question8">
+                                <h4 class="panel-title">
+                                    <a href="#" class="ing">Q: GDPR Compliance</a>
+                                </h4>
+
+                            </div>
+                            <div id="question8" class="panel-collapse collapse" style="height: 0px;">
+                                <div class="panel-body">
+                                    <h5><span class="label label-primary">Answer</span></h5>
+
+                                    <p>
+                                        MyWeddingSeatingPlanner.com is fully compliant to GDPR guidelines.
+                                        The Website use cookies to provide the best user experience.
+                                        We don't store your data nor do we share it anyone.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

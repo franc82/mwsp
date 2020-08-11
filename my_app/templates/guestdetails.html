@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %} {{ title }}{% endblock %}
+{% block body %}
+
+<section class="ai-guest-banner">
+        <div class="container">
+            <div class="ai-guest-banner-heading">
+                <h1>Guests Details</h1>
+                <!--
+                <p>By default, your guests will be created and assigned a random name <br>
+                    such as guest 1, guest 2. On the next page, you will be given the opportunity to
+                    change their name.
+                </p>
+                -->
+            </div>
+            <div class="ai-guest-banner-content">
+                <div class="ai-guest-banner-content-timeline">
+                    <div class="ai-guest-banner-content-timeline-step completed"><span>&#10003;</span></div>
+                    <div class="ai-guest-banner-content-timeline-step current"><span>&#9675;</span></div>
+                    <div class="ai-guest-banner-content-timeline-step pending"><span style="visibility: hidden;">&#10003;</span></div>
+                </div>
+                <div class="ai-guest-banner-content-timeline-label">
+                    <div class="ai-guest-banner-content-timeline-step-label">Basic Info</div>
+                    <div class="ai-guest-banner-content-timeline-step-label">Guest Details</div>
+                    <div class="ai-guest-banner-content-timeline-step-label">Review Guests</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ai-add-guest">
+        <div class="container">
+            <div class="ai-add-guest-form">
+                <div class="ai-add-guest-form-header">
+                    <h3>Guest Details</h3>
+                    <p>
+                        By default, your guests will be created and assigned a random name <br>
+                    such as guest 1, guest 2. On the next page, you will be given the opportunity to
+                    change their name.
+                    </p>
+                </div>
+                <div class="ai-add-guest-form-content">
+                    <div class="form-group">
+                        <label for="upload-csv">Upload CSV With Their Name</label>
+                        <input type="file" class="form-control hide" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" id="ai-add-guest-upload-csv">
+                        <div class="ai-add-guest-custom-file-upload">
+                            <img src="{{ url_for('static', filename='images/Document.png') }}" alt="Document Icon">
+                            <br>
+                            <span>Upload CSV File</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ui-add-guest-manually">Or add Guest Manually</label>
+                        <button id="ui-add-guest-manually" class="ui-add-guest-manually"  data-toggle="modal" data-target="#ai-add-guest-modal">Add Guests</button>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-add-guest-form-action">
+                <a href="{{ url_for('catalog.home') }}"><button class="pull-left ai-add-guest-form-action-back">Back</button></a>
+                <form action="{{ url_for('catalog.step3') }}">
+                    <button class="pull-right ai-add-guest-form-action-next">Next</button>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- Adding Guest Modal bootstrap -->
+        <div id="ai-add-guest-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="heading">
+                            <h2>Add Guest</h2>
+                            <p>Lorem Ipsum is simply dummy text of the printing.</p>
+                        </div>
+                        <div class="form">
+                            <div class="form-group">
+                                <label for="guests">Add Guests Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Guests Name" id="guests">
+                            </div>
+                            <button class="ai-modal-add-guest">Add Guest</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

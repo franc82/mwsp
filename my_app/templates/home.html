@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% block title %} {{ title }}{% endblock %}
+{% block body %}
+    <section class="ai-banner">
+        <div class="ai-banner-container">
+            <div class="container">
+                <div class="row">
+                    <div class="ai-banner-left-form col-md-5">
+                        <div class="ai-banner-left-form-header">
+                            <h2>Generate Seat Plan</h2>
+                            <p>Please tell us the number of your guests, tables, guests per table, and the minimum number of known guests.</p>
+                        </div>
+                        <!--
+                        <form action="guest.html" class="ai-banner-left-form-content" id="ai-detail-form">
+                            <div class="form-group">
+                                <label for="guests">Number of Guests</label>
+                                <input type="text" class="form-control" placeholder="Enter Number of Guests" id="guests">
+                            </div>
+                            <div class="form-group">
+                                <label for="tables">Number of Tables</label>
+                                <input type="text" class="form-control" placeholder="Enter Number of Tables" id="tables">
+                            </div>
+                            <div class="form-group">
+                                <label for="guestpertable">Minimum Number of Guest for table</label>
+                                <select class="form-control" id="guestpertable">
+                                <option>-- Selet -- </option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-default">Generate Seating Plan</button>
+                        </form>
+                        -->
+                        <form method="POST" action="{{ url_for('catalog.step2') }}" class="ai-banner-left-form-content" id="ai-detail-form">
+                            <div class="form-group">{{ form.guests.label }} {{ form.guests(id='guests', class='form-control', placeholder='Enter Number of Guests') }}</div>
+                            <div class="form-group">{{ form.tables.label }} {{ form.tables(id='tables', class='form-control', placeholder='Enter Number of Tables') }}</div>
+                            <div class="form-group">{{ form.guestpertables.label }} {{ form.guestpertables(id='guestspertable', class='form-control', placeholder='Enter Number of Guests per Table') }}</div>
+                            <div class="form-group">{{ form.minguest.label }} {{ form.minguest(class='form-control', id='guestpertable') }}</div>
+                            <button type="submit" class="ai-info-section-content-started-btn">Generate Seating Plan</button>
+                            {{ form.csrf_token }}
+                        </form>
+                    </div>
+                    <div class="col-md-7 ai-banner-right-content">
+                        <h1 class="ai-banner-content-heading">AI-Wedding Seating Planner</h1>
+                        <p class="ai-banner-content-description">We use AI to create a wedding seating planner tool to arrange the layout of your reception tables and create your seating plan.</p>
+                        <!--<a href="guest.html"><button class="ai-banner-content-started">Start Your table Plan</button></a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section class="ai-info-section">
+        <img src="{{ url_for('static', filename='images/Rectangle5326.png') }}" alt="section bg style" class="ai-info-section-bg-style">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="ai-info-section-heading">
+                        <h1>Organize Your Wedding Reception with Ease</h1>
+                        <p>
+                            Our 3-step table planner makes planning your reception extremely easy.
+                            Once you’ve entered your guests, as well as their acquintance, we will do the rest.
+                        </p>
+                    </div>
+                    <div class="ai-info-section-content row">
+                        <div class="col-md-6">
+                            <img src="{{ url_for('static', filename='images/gridsvg.png') }}" alt="grids icon">
+                            <h2 class="ai-info-section-content-card-heading">99.99% Uptime </h2>
+                            <p class="ai-info-section-content-card-description">Over 100k visitors per month</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="{{ url_for('static', filename='images/Sync.png') }}" alt="Sync icon">
+                            <h2 class="ai-info-section-content-card-heading">Always in Sync</h2>
+                            <p class="ai-info-section-content-card-description">Don’t worry about the data, always be synchronized.</p>
+                        </div>
+                    </div>
+                    <div class="ai-info-section-content-started">
+                        <img src="{{ url_for('static', filename='images/Oval.png') }}" alt="bg style image" class="bg-style-img">
+                        <!--<a href="#ai-detail-form"><button class="ai-info-section-content-started-btn">Start Your table Plan <i class="fa fa-arrow-right"></i></button></a>-->
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="ai-info-content-web-preview">
+                        <img src="{{ url_for('static', filename='images/webpreview.png') }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section class="ai-about-section">
+        <div class="container">
+            <div class="ai-about-section-heading">
+                <h2>Why you should choose <span>MyWeddingSeatingPlanner.com</span></h2>
+                <!--<p>Here are the benefits:-->
+                </p>
+            </div>
+            <div class="ai-about-section-content row">
+                <div class="ai-about-section-content-card col-md-4">
+                    <div class="col-md-4 ai-about-section-content-card-icon">
+                        <img src="{{ url_for('static', filename='images/a1.png') }}" alt="Home Icon Images">
+                    </div>
+                    <div class="col-md-8 ai-about-section-card-content">
+                        <h6>Unlimited Flexibility</h6>
+                        <p>
+                            See the full seating plan of your guests.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="ai-about-section-content-card col-md-4">
+                    <div class="col-md-4 ai-about-section-content-card-icon">
+                        <img src="{{ url_for('static', filename='images/a2.png') }}" alt="Home Icon Images">
+                    </div>
+                    <div class="col-md-8 ai-about-section-card-content">
+                        <h6>Secure and fast</h6>
+                        <p>Save time, energy and avoid misunderstandings.</p>
+                    </div>
+                </div>
+
+                <div class="ai-about-section-content-card col-md-4">
+                    <div class="col-md-4 ai-about-section-content-card-icon">
+                        <img src="{{ url_for('static', filename='images/a3.png') }}" alt="Home Icon Images">
+                    </div>
+                    <div class="col-md-8 ai-about-section-card-content">
+                        <h6>Friendly Layout</h6>
+                        <p>We automatically work out the seating plan of your guests.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-about-section-content row">
+                <div class="ai-about-section-content-card col-md-4">
+                    <div class="col-md-4 ai-about-section-content-card-icon">
+                        <img src="{{ url_for('static', filename='images/a4.png') }}" alt="Home Icon Images">
+                    </div>
+                    <div class="col-md-8 ai-about-section-card-content">
+                        <h6>Simple usage</h6>
+                        <p>In 3 steps, you will get a full seating plan for your guest without hassle.</p>
+                    </div>
+                </div>
+                <div class="ai-about-section-content-card col-md-4">
+                    <div class="col-md-4 ai-about-section-content-card-icon">
+                        <img src="{{ url_for('static', filename='images/a5.png') }}" alt="Home Icon Images">
+                    </div>
+                    <div class="col-md-8 ai-about-section-card-content">
+                        <h6>Proven Technology</h6>
+                        <p>We used the latest AI technology to ensure that your guests are assigned to tables with their friends.</p>
+                    </div>
+                </div>
+                <div class="ai-about-section-content-card col-md-4">
+                    <div class="col-md-4 ai-about-section-content-card-icon">
+                        <img src="{{ url_for('static', filename='images/a6.png') }}"  alt="Home Icon Images">
+                    </div>
+                    <div class="col-md-8 ai-about-section-card-content">
+                        <h6>98.99% satisfaction</h6>
+                        <p>If you are not satisfied by the results, we will refund you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

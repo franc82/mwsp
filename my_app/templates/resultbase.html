@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %} {{ title }}{% endblock %}
+{% block body %}
+<section>
+    <div class="ai-seating-plan-header">
+        <div class="container">
+            {% block resultheader %}{% endblock %}
+        </div>
+    </div>
+    <div class="ai-seating-plan-content">
+        <div class="col-md-9 ai-ui-tables">
+            <div class="col-md-3 ai-four-ppl-col">
+                <div class="ai-ppl-table ai-four-ppl-table">
+                    <label for="table-number">Table 1</label>
+                    <img src="{{ url_for('static', filename='images/4ppl-table.png') }}" id="table-number">
+                </div>
+                <div class="ai-ppl-table ai-four-ppl-table">
+                    <label for="table-number">Table 2</label>
+                    <img src="{{ url_for('static', filename='images/4ppl-table.png') }}" id="table-number">
+                </div>
+                <div class="ai-ppl-table ai-four-ppl-table">
+                    <label for="table-number">Table 3</label>
+                    <img src="{{ url_for('static', filename='images/4ppl-table.png') }}" id="table-number">
+                </div>
+            </div>
+            <div class="col-md-3 ai-six-ppl-col">
+                <div class="ai-ppl-table ai-six-ppl-table">
+                    <label for="table-number">Table 4</label>
+                    <img src="{{ url_for('static', filename='images/6ppl-table.png') }}" id="table-number">
+                </div>
+                <div class="ai-ppl-table ai-six-ppl-table">
+                    <label for="table-number">Table 5</label>
+                    <img src="{{ url_for('static', filename='images/6ppl-table.png') }}" id="table-number">
+                </div>
+            </div>
+            <div class="col-md-3 ai-two-ppl-col">
+                <div class="ai-ppl-table ai-two-ppl-table">
+                    <label for="table-number">Table 6</label>
+                    <img src="{{ url_for('static', filename='images/2ppl-table.png') }}" id="table-number">
+                </div>
+                <div class="ai-ppl-table ai-two-ppl-table">
+                    <label for="table-number">Table 7</label>
+                    <img src="{{ url_for('static', filename='images/2ppl-table.png') }}" id="table-number">
+                </div>
+                <div class="ai-ppl-table ai-two-ppl-table">
+                    <label for="table-number">Table 8</label>
+                    <img src="{{ url_for('static', filename='images/2ppl-table.png') }}" id="table-number">
+                </div>
+                <div class="ai-ppl-table ai-two-ppl-table">
+                    <label for="table-number">Table 9</label>
+                    <img src="{{ url_for('static', filename='images/2ppl-table.png') }}" id="table-number">
+                </div>
+            </div>
+            <div class="col-md-3 ai-four-ppl-col">
+                <div class="ai-ppl-table ai-four-ppl-table">
+                    <label for="table-number">Table 10</label>
+                    <img src="{{ url_for('static', filename='images/4ppl-table.png') }}" id="table-number">
+                </div>
+                <div class="ai-ppl-table ai-four-ppl-table">
+                    <label for="table-number">Table 11</label>
+                    <img src="{{ url_for('static', filename='images/4ppl-table.png') }}" id="table-number">
+                </div>
+                <div class="ai-ppl-table ai-four-ppl-table">
+                    <label for="table-number">Table 12</label>
+                    <img src="{{ url_for('static', filename='images/4ppl-table.png') }}" id="table-number">
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            {% block paymentblock %}{% endblock %}
+
+            <div class="clearfix"></div>
+            <div class="ai-feedback">
+                <p><a href="#">Give us your feedback</a></p>
+            </div>
+        </div>
+        <div class="col-md-3 ai-table-sidebar">
+            <div class="container">
+                {% for table in seating %}
+                {% if seating[table]|length > 0 %}
+                <div class="ai-sidebar-table-details">
+                    <div class="ai-sidebar-table-details-table-no">
+                        <h6>{{ table }}</h6>
+                    </div>
+                    <div class="ai-sidebar-table-details-table-no-guest">
+                    {% for guest in seating[table] %}
+                        <p class="ai-single-guest">
+                            <span class="ai-name">{{ guest }}</span>
+                            <!--<span class="ai-detail">Son - Groom</span>-->
+                        </p>
+                    {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</section>
+{% endblock %}

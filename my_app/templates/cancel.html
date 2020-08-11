@@ -1,0 +1,25 @@
+{% extends "resultbase.html" %}
+
+{% block resultheader %}
+<h2>Sorry, we could not receive your payment, please try again!</h2>
+{% endblock %}
+
+{% block paymentblock %}
+<div class="ai-pricing-plans">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <input type="hidden" id="stripesessionid" value="{{ stripeobj['id'] }}">
+            <div class="ai-pricing-plan" id="paylink">
+                <p>To get the Full seat plan in this setting</p>
+                <p>$5</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="ai-pricing-plan">
+                <p>To get the all the possible setting plans in a Pdf file</p>
+                <p>$10</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
