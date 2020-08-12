@@ -299,9 +299,9 @@ jQuery(document).ready(function (){
     });
 
     jQuery(document).on('click', '#paylink', function(evt){
-        console.log('click on payment button...');
         evt.preventDefault();
-        var stripe = Stripe('pk_test_51HDuHyKfKC2ONPsdfwuY2cEp6p9I3d4okBrXDihiE4hMsR2rMHMfq7i5kxuPHfbrC6Ez7afSEGqVJHIpp2Fu8uuP004DIkp5Hn');
+        // var stripe = Stripe('pk_test_51HDuHyKfKC2ONPsdfwuY2cEp6p9I3d4okBrXDihiE4hMsR2rMHMfq7i5kxuPHfbrC6Ez7afSEGqVJHIpp2Fu8uuP004DIkp5Hn');
+        var stripe = Stripe('pk_live_51HDuHyKfKC2ONPsdd9pxbtbj4ota2JUs80ghD7fyqmoO8XqswZl8dGi57B31CSIRGBgho6hLGNf16tsnAaHc5J8X00LtNMmr8U');
         stripe.redirectToCheckout({
           // Make the id field from the Checkout Session creation API response
           // available to this file, so you can provide it as parameter here
