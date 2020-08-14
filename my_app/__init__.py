@@ -21,9 +21,7 @@ app.config['MAIL_USE_SSL'] = True
 mail.init_app(app)
 db = SQLAlchemy(app)
 app.secret_key = secrets.token_urlsafe(16)
-#stripekey = 'sk_test_51HDuHyKfKC2ONPsdR2fZjJ6nZEsJ6rGpGiV6s6HNKJjqvch3mhlIqyus6VZjwHw8RnFpEZCNxXbyZaLORP1hSwBw00mV32lWlQ'
-#app.secret_key = 'any key to be used'
-stripekey = 'pk_live_51HDuHyKfKC2ONPsdd9pxbtbj4ota2JUs80ghD7fyqmoO8XqswZl8dGi57B31CSIRGBgho6hLGNf16tsnAaHc5J8X00LtNMmr8U'
+stripekey = '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'
 SESSION_TYPE = 'redis'
 sess = Session()
 

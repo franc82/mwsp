@@ -61,9 +61,6 @@ def contact():
     contactform = ContactForm()
     if request.method == 'POST':
         message = request.form
-        # print('message: ', message.get('message'))
-        # print('email: ', message.get('email'))
-        # print('name: ', message.get('name'))
         msg = Message('New Contact Message', sender=message.get('email'),
                       recipients=['id1@gmail.com'],
                       body=message.get('message')
@@ -80,7 +77,8 @@ def contact():
         db.session.commit()
 
         try:
-            mail.send(msg)
+            # mail.send(msg)
+            print('sending email')
         except:
             success = False
             for i, e in enumerate(sys.exc_info()):
@@ -145,9 +143,6 @@ def step3(page=1):
         'guestlist': [{'id': i['id'], 'name': i['name'], 'acq': i['acq']} for i in arrGuestList]
     }
 
-    #print(session['guestlist'])
-    #print('num guests: ', len(session['guestlist']))
-    #print(friendListLookup)
     return render_template('guestreview.html', title='Guest Review', guests=guestconfig)
 
 
@@ -160,21 +155,6 @@ def results():
     min_known_neighbors = int(session['config']['minguestpertable'])
     names = [i['name'] for i in session['guestlist']]
 
-    # randomly connect non-neighbors
-    ''''
-    for node in session['graph'].nodes():
-        for i in nx.non_neighbors(session['graph'], node):
-            session['graph'].add_edge(node, i, weight=random.randint(0, 1))
-    '''
-
-    '''
-    session['graph'].add_edge(1, 2, weight=50)
-    session['graph'].add_edge(3, 4, weight=50)
-    session['graph'].add_edge(3, 9, weight=10)
-    session['graph'].add_edge(5, 6, weight=50)
-    session['graph'].add_edge(7, 8, weight=50)
-    session['graph'].add_edge(10, 11, weight=50)
-    '''
     # ensure that nodes with the same acquintance are connected with weight 1
     # this operation should happen just before passing the graph to the final computation
     acqlookup = {guest['id']: guest['acq'] for guest in session['guestlist']}
@@ -203,32 +183,7 @@ def results():
     db.session.add(solutionrow)
     db.session.commit()
 
-    '''
-    additionaljs = ["https://js.stripe.com/v3/"]
-    stripe.api_key = 'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
-    product = stripe.Product.create(
-        name='Blue banana',
-    )
-    price = stripe.Price.create(
-        product=product['id'],
-        unit_amount=500,
-        currency='usd',
-    )
-    stripe_session = stripe.checkout.Session.create(
-        payment_method_types=['card'],
-        line_items=[{
-            'price': price['id'],
-            'quantity': 1,
-        }],
-        mode='payment',
-        success_url='https://example.com/success/%s' % session['user_id'],
-        cancel_url='https://example.com/cancel/%s' % session['user_id'],
-    )
-    '''
     # stripe payment data
-    #sapikey = 'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
-    #sapikey = 'sk_test_51HDuHyKfKC2ONPsdR2fZjJ6nZEsJ6rGpGiV6s6HNKJjqvch3mhlIqyus6VZjwHw8RnFpEZCNxXbyZaLORP1hSwBw00mV32lWlQ'
-    #print('[INFO] Stripe key: ', stripekey)
     stripejs, stripeobj = StripeWrapper.generatePaymentData(session['user_id'], stripekey, request.url_root)
     sol = dict(list(solution.items())[:len(solution)//2])
     return render_template('results.html', title='Results', seating=sol, extrajs=stripejs, stripeobj=stripeobj)
@@ -244,7 +199,6 @@ def rendercancellationpage(sessionid):
         #print('[INFO] num days = ', delta.days)
 
     # stripe payment data
-    #sapikey = 'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
     stripejs, stripeobj = StripeWrapper.generatePaymentData(sessionid, stripekey, request.url_root)
     sol = seatingplan.solution
     return render_template('cancel.html', seating=dict(list(sol.items())[:len(sol)//2]), title='Cancellation page',
@@ -254,7 +208,6 @@ def rendercancellationpage(sessionid):
 
 @catalog.route('/paymentsuccess/<sessionid>', methods=['POST', 'GET'])
 def rendersuccesspage(sessionid):
-    #sApikey = 'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
     result = StripeWrapper.verifypayment(stripekey, request)
     seatingplan = SeatingPlan.query.filter_by(sessionid=sessionid).first_or_404()
 
@@ -410,35 +363,6 @@ def editguest(guestid=None):
     return response
 
 
-'''
-@catalog.route('/add', methods=['POST'])
-def addguest():
-    response = {}
-    # find the id of new guest to be added
-    newguestid = sorted([int(i['id']) for i in session['guestlist']])[-1] + 1
-    newguest = Guest(newguestid, 'Guest %d' % newguestid)
-
-    # add the new guest id to the graph
-    session['graph'].add_edge(newguestid, newguestid, weight=1)
-
-    for key, value in request.form.items():
-        if key == 'friends':
-            friendlist = [int(i) for i in value.split(',')]
-            newguest['friends'] = friendlist
-
-            # update those in the graph
-            session['graph'].add_edges_from([(newguestid, i, {'weight': 50}) for i in friendlist])
-        else:
-            newguest[key] = value
-
-    session['guestlist'].append(newguest)
-    response['guestlist'] = session['guestlist']
-    response['matrixC'] = nx.adjacency_matrix(session['graph']).todense().tolist()
-
-    return response
-'''
-
-
 @catalog.route('/delete/<int:guestid>', methods=['POST'])
 def deleteguest(guestid):
     response = {'message': 'unable to remove this guest', 'numguests': len(session['guestlist'])}
@@ -472,79 +396,3 @@ def adminres(page=1):
     res = SeatingPlan.query.order_by(desc(SeatingPlan.solutiondate)).paginate(page, 10)
     num = len(SeatingPlan.query.all())
     return render_template('seatingplans.html', seatingplans=res, title='seating plans', total=num)
-
-
-''''
-@catalog.route('/product/<id>')
-def product(id):
-    product = Product.query.get_or_404(id)
-    return render_template('product.html', product=product)
-
-
-@catalog.route('/products')
-@catalog.route('/products/<int:page>')
-def products(page=1):
-    products = Product.query.paginate(page, 10)
-    return render_template('products.html', products=products)
-
-
-@catalog.route('/product-create', methods=['GET', 'POST'])
-def create_product():
-    if request.method == 'POST':
-        name = request.form.get('name')
-        price = request.form.get('price')
-        categ_name = request.form.get('category')
-        category = Category.query.filter_by(name=categ_name).first()
-        if not category:
-            category = Category(categ_name)
-        product = Product(name, price, category)
-        db.session.add(product)
-        db.session.commit()
-        flash('The product %s has been created' % name, 'success')
-        return redirect(url_for('catalog.product', id=product.id))
-    return render_template('product-create.html')
-
-
-@catalog.route('/product-search')
-@catalog.route('/product-search/<int:page>')
-def product_search(page=1):
-    name = request.args.get('name')
-    price = request.args.get('price')
-    company = request.args.get('company')
-    category = request.args.get('category')
-    products = Product.query
-    if name:
-        products = products.filter(Product.name.like('%' + name + '%'))
-    if price:
-        products = products.filter(Product.price == price)
-    if company:
-        products = products.filter(Product.company.like('%' + company + '%'))
-    if category:
-        products = products.select_from(join(Product, Category)).filter(
-            Category.name.like('%' + category + '%')
-        )
-    return render_template(
-        'products.html', products=products.paginate(page, 10)
-    )
-
-
-@catalog.route('/category-create', methods=['POST',])
-def create_category():
-    name = request.form.get('name')
-    category = Category(name)
-    db.session.add(category)
-    db.session.commit()
-    return render_template('category.html', category=category)
-
-
-@catalog.route('/category/<id>')
-def category(id):
-    category = Category.query.get_or_404(id)
-    return render_template('category.html', category=category)
-
-
-@catalog.route('/categories')
-def categories():
-    categories = Category.query.all()
-    return render_template('categories.html', categories=categories)
-'''

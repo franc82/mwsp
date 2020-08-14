@@ -36,48 +36,6 @@ jQuery(document).ready(function (){
         });
     }
 
-    /*
-    jQuery('.ai-testimonial-slider').slick({
-        dots: false,
-        infinite: true,
-        arrow: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        adaptiveHeight: true,
-        // autoplay: true,
-        // autoplaySpeed: 2000,
-        prevArrow: jQuery('.ai-testimonial-slider-arrows-prev'),
-        nextArrow: jQuery('.ai-testimonial-slider-arrows-next'),
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: false,
-                    arrow: true,
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    });
-    */
-
     jQuery(document).on('click', '.ai-modal-add-guest , .ai-modal-update-guest', function(evt){
         evt.preventDefault();
         jQuery('#ai-add-guest-modal').modal('hide');
@@ -192,32 +150,7 @@ jQuery(document).ready(function (){
                         }, 'json');
                     }
                 }
-                /*
-                jQuery('.ai-preloader').show();
-                var $this = jQuery(this),
-                    parent = $this.closest('.form'),
-                    relationship = parent.find('#ai-guest-relationship').val(),
-                    acquaintance = parent.find('#ai-guest-acquaintance').val();
-                jQuery(document).delay( 2000 ).queue(function(){
-                    $parent.find('.ai-relation').text(relationship);
-                    $parent.find('.ai-acquaintance').text(acquaintance);
-                    jQuery('#ai-guest-detail-modal').modal('toggle');
-                    jQuery('.ai-preloader').hide();
-                });
-                */
             });
-
-            // Code For All Guest
-            /*
-            jQuery('.ai-guest-list tbody .ai-name').each(function(index) {
-                var $name = jQuery(this).text();
-                if ($name != $Sname){
-                    var $outputt = '<div class="checkbox"><label style="font-size: 14px;"><input id="guest-id-'+index+'" type="checkbox" value="'+$name+'">'+$name+'</label></div>';
-                    jQuery('#ai-guest-detail-modal #ai-modal-guest-list').append($outputt);
-                }
-            });
-            */
-
         });
 
         jQuery(document).on('click', '.ai-guest-list .ai-actions i.fa-trash', function(evt){
@@ -300,8 +233,7 @@ jQuery(document).ready(function (){
 
     jQuery(document).on('click', '#paylink', function(evt){
         evt.preventDefault();
-        // var stripe = Stripe('pk_test_51HDuHyKfKC2ONPsdfwuY2cEp6p9I3d4okBrXDihiE4hMsR2rMHMfq7i5kxuPHfbrC6Ez7afSEGqVJHIpp2Fu8uuP004DIkp5Hn');
-        var stripe = Stripe('pk_live_51HDuHyKfKC2ONPsdd9pxbtbj4ota2JUs80ghD7fyqmoO8XqswZl8dGi57B31CSIRGBgho6hLGNf16tsnAaHc5J8X00LtNMmr8U');
+        var stripe = Stripe('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');
         stripe.redirectToCheckout({
           // Make the id field from the Checkout Session creation API response
           // available to this file, so you can provide it as parameter here
