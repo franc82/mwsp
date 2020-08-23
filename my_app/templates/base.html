@@ -19,6 +19,15 @@
      <script src="{{ js }}" type="text/javascript"></script>
     {% endfor %}
     <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <link rel="canonical" href="{{ url_for(request.endpoint, _external=True) }}">
+    <meta property="og:url" content="{{ url_for(request.endpoint, _external=True) }}"/>
+    {% for key, value in meta.items() %}
+    {% if key.startswith('og') %}
+    <meta property="{{ key }}" content="{{ value }}"/>
+    {% else %}
+    <meta name="{{ key }}" content="{{ value }}"/>
+    {% endif %}
+    {% endfor %}
 </head>
 <body>
 <header>
@@ -31,7 +40,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="{{ url_for('catalog.home') }}">
-                    <img src="{{ url_for('static', filename='images/logo.png') }}" class="" alt="Brand Logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Brand Logo">
                 </a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -43,7 +52,7 @@
                     -->
                     <li><a href="{{ url_for('catalog.faq') }}">FAQ</a></li>
                     <li><a href="{{ url_for('catalog.contact') }}">Contact us</a></li>
-                    <li class="ai-seating-plan-button"><a href="{{ url_for('catalog.home') }}"><button>Get Seating Plan</button></a></li>
+                    <li class="ai-seating-plan-button"><a href="{{ url_for('catalog.demo') }}"><button>Demo</button></a></li>
                 </ul>
             </div>
             <div class="clearfix"></div>

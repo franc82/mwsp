@@ -1,6 +1,6 @@
 .minified
-.sqlite
-.pyc
+*.sqlite
+*.pyc
 .externalToolBuilders/
 .tags
 ICONS
@@ -11,7 +11,7 @@ Thumbs.db
 *.js.min.*
 *.css.map
 *.sql
-*.pyc
+.pyc
 !EXCLUDED/db/migrations/*.sql
 .rbenv-version
 .settings

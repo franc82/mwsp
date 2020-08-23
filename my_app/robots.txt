@@ -18,6 +18,9 @@ Disallow: /
 User-agent: *
 Disallow: /store/filtered/
 
+User-agent: *
+Disallow: /sp
+
 # http://help.goo.ne.jp/help/article/853/
 User-agent: moget
 User-agent: ichiro

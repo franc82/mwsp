@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import request, Blueprint, render_template, jsonify, session, send_from_directory
+from flask import request, Blueprint, render_template, jsonify, session, make_response
 from my_app import db, app, mail, stripekey
 from my_app.catalog.models import Guest, SettingsForm, WeddingChartPrinter, \
     SeatingPlan, StripeWrapper, ContactForm, ContactMessage
@@ -7,13 +7,14 @@ from my_app.catalog.models import Guest, SettingsForm, WeddingChartPrinter, \
 from sqlalchemy import desc
 import uuid
 # import stripe
-from datetime import datetime
+from datetime import datetime, timedelta
 # import json
 import random
 from flask_weasyprint import HTML, render_pdf
 import networkx as nx
 from flask_mail import Message
 import sys
+import time
 # from networkx.algorithms import approximation as approx
 # from networkx.readwrite import json_graph
 
@@ -48,17 +49,49 @@ def page_not_found(e):
 #@template_or_json('home.html')
 def home():
     Settingform = SettingsForm()
-    return render_template('home.html', form=Settingform, title='Welcome to my App')
+    sPageTitle = 'Welcome to your online wedding seating planner tool - MyWeddingSeatingPlanner.com'
+    sDescription = 'This website takes the pain from you by helping you to plan the seating of your guests for your wedding in a smart way. Trusted by millions and very reliable.'
+    objMeta = {
+        'googlebot': 'index,follow,snippet,archive',
+        'description': sDescription,
+        'keywords': 'wedding seating planner, wedding, planning, online planner, seat',
+        'publisher': 'BahamSoft Ltd',
+        'og:title': sPageTitle,
+        'og:description': sDescription
+    }
+    return render_template('home.html', form=Settingform, meta=objMeta,
+                           title=sPageTitle)
 
 
 @catalog.route('/faq')
 def faq():
-    return render_template('faq.html', title='FAQ')
+    sPageTitle = 'FAQ - MyWeddingSeatingPlanner.com'
+    sDescription = 'Frequently asked questions about the website. We will answer any of your query in a timely manner.'
+    objMeta = {
+        'googlebot': 'index,follow,snippet,archive',
+        'description': sDescription,
+        'keywords': 'FAQ, frequently asked questions, wedding, seating, planning',
+        'publisher': 'BahamSoft Ltd',
+        'og:title': sPageTitle,
+        'og:description': sDescription
+    }
+    return render_template('faq.html', meta=objMeta,
+                           title=sPageTitle)
 
 
 @catalog.route('/contact', methods=['POST', 'GET'])
 def contact():
     contactform = ContactForm()
+    sPageTitle = 'Contact Us - MyWeddingSeatingPlanner.com'
+    sDescription = 'Submit any of your query to us in this page. We usually reply within hours.'
+    objMeta = {
+        'googlebot': 'index,follow,snippet,archive',
+        'description': sDescription,
+        'keywords': 'contact us, wedding, email, contact form',
+        'publisher': 'BahamSoft Ltd',
+        'og:title': sPageTitle,
+        'og:description': sDescription
+    }
     if request.method == 'POST':
         message = request.form
         msg = Message('New Contact Message', sender=message.get('email'),
@@ -84,19 +117,53 @@ def contact():
             for i, e in enumerate(sys.exc_info()):
                 print('error %s => %s' % (i, sys.exc_info()[i]))
 
-        return render_template('contact.html', form=contactform, title='Contact Us', success=success)
+        return render_template('contact.html', meta=objMeta,
+                               form=contactform, title=sPageTitle, success=success)
     elif request.method == 'GET':
-        return render_template('contact.html', form=contactform, title='Contact Us')
+        return render_template('contact.html', meta=objMeta,
+                               form=contactform, title=sPageTitle)
 
 
-@catalog.route('/robots.txt')
+#@catalog.route('/robots.txt')
+#@catalog.route('/sitemap.xml')
+#def static_from_root():
+#    return send_from_directory('', request.path[1:])
+# sitemap generation
 @catalog.route('/sitemap.xml')
-def static_from_root():
-    return send_from_directory('', request.path[1:])
+def sitemap():
+    pages = ['contact', 'faq', 'demo']
+    lastmod = datetime.now() - timedelta(days=10)
+    lastmod = lastmod.strftime('%Y-%m-%d')
+    parameters = []
+    # adding the homepage
+    parameters.append({
+        'url': request.host_url,
+        'modified': lastmod
+    })
+    for page in pages:
+        parameters.append({
+            'url': request.host_url + page,
+            'modified': lastmod
+        })
+
+    xml_sitemap = render_template("sitemap.xml", pages=parameters)
+    response = make_response(xml_sitemap)
+    response.headers["Content-Type"] = "application/xml"
+    return response
 
 
 @catalog.route('/step2', methods=['GET', 'POST'])
 def step2():
+    sPageTitle = 'Provide your Guest Details - MyWeddingSeatingPlanner.com'
+    sDescription = 'Provide your guest details to the system. we can either do so by uploading a csv file or enter it manually.'
+    objMeta = {
+        'googlebot': 'index,follow,snippet,archive',
+        'description': sDescription,
+        'keywords': 'guest details, wedding, seating planner, csv files',
+        'publisher': 'BahamSoft Ltd',
+        'og:title': sPageTitle,
+        'og:description': sDescription
+    }
     if request.method == 'POST':
         numguest = int(request.form.get('guests'))
         numtables = request.form.get('tables')
@@ -115,12 +182,15 @@ def step2():
         graph = nx.Graph()
         graph.add_edges_from([(int(i['id']), int(i['id'])) for i in session['guestlist']])
         session['graph'] = graph
-    return render_template('guestdetails.html', title='Guest Details')
+    return render_template('guestdetails.html', meta=objMeta,
+                           title=sPageTitle)
 
 
 @catalog.route('/step3')
 @catalog.route('/step3/<int:page>')
 def step3(page=1):
+    sPageTitle = 'Guest Review - MyWeddingSeatingPlanner.com'
+    sDescription = 'Provide further details about your guests to the system. This is needed to ensure that the seating plan is correct.'
     numguests = len(session['guestlist'])
     guestperpage = 50
     numpages = -(-numguests//guestperpage)
@@ -142,12 +212,75 @@ def step3(page=1):
         'friendlookup': friendListLookup,
         'guestlist': [{'id': i['id'], 'name': i['name'], 'acq': i['acq']} for i in arrGuestList]
     }
+    objMeta = {
+        'googlebot': 'index,follow,snippet,archive',
+        'description': sDescription,
+        'keywords': 'guests, wedding, seating plan',
+        'publisher': 'BahamSoft Ltd',
+        'og:title': sPageTitle,
+        'og:description': sDescription
+    }
 
-    return render_template('guestreview.html', title='Guest Review', guests=guestconfig)
+    return render_template('guestreview.html', meta=objMeta,
+                           title=sPageTitle, guests=guestconfig)
+
+
+@catalog.route('/demo')
+def demo():
+    sPageTitle = 'Sample results of the application - MyWeddingSeatingPlanner.com'
+    sDescription = 'A sample results generated by the application. The guests and their relationships were randomly generated.'
+    objMeta = {
+        'googlebot': 'index,follow,snippet,archive',
+        'description': sDescription,
+        'keywords': 'Demo, seating plan, wedding',
+        'publisher': 'BahamSoft Ltd',
+        'og:title': sPageTitle,
+        'og:description': sDescription
+    }
+    '''
+    numguest = 75  # 100
+    numtable = 15
+    min_known_neighbors = 1
+    table_capacity = 5  # 7 too is a good number
+    start_time = time.time()
+    G = nx.random_regular_graph(4, numguest)  # 5 is a good number
+    e = [(u, v, {'weight': 50}) for u, nbrs in G.adj.items() for v in nbrs]
+    f = [(u, u) for u in G.nodes()]
+    update = e + f
+    G.update(edges=update)
+    C = nx.adjacency_matrix(G).todense().tolist()
+    guestlist = [Guest(i + 1, "Guest " + str(i + 1)) for i in range(numguest)]
+    names = [i['name'] for i in guestlist]
+    solution = WeddingChartPrinter.solve_with_discrete_model(numtable, table_capacity, min_known_neighbors, C, names)
+    print('solution: ', solution)
+    current_time = time.time()
+    '''
+
+    numguests = 105
+    guestpertable = 7
+    numtables = 15
+    guestlist = ["Guest " + str(i + 1) for i in range(numguests)]
+    random.shuffle(guestlist)
+    solution = {}
+    for i in range(numtables):
+        solution['Table %d' % (i + 1)] = guestlist[i * guestpertable:i * guestpertable + guestpertable]
+
+    return render_template('demo.html', meta=objMeta,
+                           title=sPageTitle, seating=solution)
 
 
 @catalog.route('/results')
 def results():
+    sPageTitle = 'Results page - MyWeddingSeatingPlanner.com'
+    sDescription = 'Your seating plan for your wedding as generated by us.'
+    objMeta = {
+        'googlebot': 'index,follow,snippet,archive',
+        'description': sDescription,
+        'keywords': 'seating plans, wedding, guests, seats',
+        'publisher': 'BahamSoft Ltd',
+        'og:title': sPageTitle,
+        'og:description': sDescription
+    }
     numguests = int(session['config']['numguest'])
     num_tables = int(session['config']['numtables'])
     table_capacity = int(session['config']['numguestspertable'])
@@ -186,11 +319,22 @@ def results():
     # stripe payment data
     stripejs, stripeobj = StripeWrapper.generatePaymentData(session['user_id'], stripekey, request.url_root)
     sol = dict(list(solution.items())[:len(solution)//2])
-    return render_template('results.html', title='Results', seating=sol, extrajs=stripejs, stripeobj=stripeobj)
+    return render_template('results.html', meta=objMeta,
+                           title=sPageTitle, seating=sol, extrajs=stripejs, stripeobj=stripeobj)
 
 
 @catalog.route('/cancel/<sessionid>')
 def rendercancellationpage(sessionid):
+    sPageTitle = 'Payment Cancellation page - MyWeddingSeatingPlanner.com'
+    sDescription = 'Your seating plan for your wedding as generated by us.'
+    objMeta = {
+        'googlebot': 'index,follow,snippet,archive',
+        'description': sDescription,
+        'keywords': 'seating plans, wedding, guests, seats, payment failure',
+        'publisher': 'BahamSoft Ltd',
+        'og:title': sPageTitle,
+        'og:description': sDescription
+    }
     seatingplan = SeatingPlan.query.filter_by(sessionid=sessionid).first_or_404()
     if seatingplan:
         d1 = seatingplan.solutiondate
@@ -201,8 +345,9 @@ def rendercancellationpage(sessionid):
     # stripe payment data
     stripejs, stripeobj = StripeWrapper.generatePaymentData(sessionid, stripekey, request.url_root)
     sol = seatingplan.solution
-    return render_template('cancel.html', seating=dict(list(sol.items())[:len(sol)//2]), title='Cancellation page',
-                           extrajs=stripejs, stripeobj=stripeobj
+    return render_template('cancel.html', seating=dict(list(sol.items())[:len(sol)//2]),
+                           title=sPageTitle,
+                           extrajs=stripejs, stripeobj=stripeobj, meta=objMeta
                            )
 
 
@@ -210,12 +355,25 @@ def rendercancellationpage(sessionid):
 def rendersuccesspage(sessionid):
     result = StripeWrapper.verifypayment(stripekey, request)
     seatingplan = SeatingPlan.query.filter_by(sessionid=sessionid).first_or_404()
+    sPageTitle = 'Payment Success page - MyWeddingSeatingPlanner.com'
+    sDescription = 'Your seating plan for your wedding as generated by us.'
+    objMeta = {
+        'googlebot': 'index,follow,snippet,archive',
+        'description': sDescription,
+        'keywords': 'thank you, payment page, success, seats, wedding',
+        'publisher': 'BahamSoft Ltd',
+        'og:title': sPageTitle,
+        'og:description': sDescription
+    }
 
     if result:
-        return render_template('paymentsuccess.html', sessionid=sessionid, title='Payment Success page')
+        return render_template('paymentsuccess.html', meta=objMeta,
+                               sessionid=sessionid, title=sPageTitle)
     else:
         # render cancel page with an error message
-        return render_template('cancel.html', seating=seatingplan.solution, title='Cancellation page')
+        return render_template('cancel.html', meta=objMeta,
+                               seating=seatingplan.solution,
+                               title=sPageTitle)
 
 
 @catalog.route('/seating_<sessionid>.pdf')
@@ -229,7 +387,6 @@ def seatingpdf(sessionid):
 @catalog.route('/guest/<int:guestid>', methods=['GET', 'POST'])
 def editguest(guestid=None):
     response = {}
-    #print('[INFO] in here', guestid)
     if request.method == 'POST':
         # if the guestid is set then we need to update the record otherwise we add a new guest
         if guestid is not None:
@@ -393,6 +550,17 @@ def deleteguest(guestid):
 @catalog.route('/sp')
 @catalog.route('/sp/<int:page>')
 def adminres(page=1):
+    sPageTitle = 'seating plans - MyWeddingSeatingPlanner.com'
+    sDescription = 'Your seating plan for your wedding as generated by us.'
+    objMeta = {
+        'googlebot': 'noindex,nofollow,snippet,archive',
+        'description': 'admin page for seating plans',
+        'keywords': 'seating plans',
+        'publisher': 'BahamSoft Ltd',
+        'og:title': sPageTitle,
+        'og:description': sDescription
+    }
     res = SeatingPlan.query.order_by(desc(SeatingPlan.solutiondate)).paginate(page, 10)
     num = len(SeatingPlan.query.all())
-    return render_template('seatingplans.html', seatingplans=res, title='seating plans', total=num)
+    return render_template('seatingplans.html', meta=objMeta,
+                           seatingplans=res, title=sPageTitle, total=num)
