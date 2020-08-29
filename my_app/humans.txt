@@ -1,0 +1,14 @@
+/* TEAM */
+	CEO / Founder: Dr. Franclin Foping
+	Location: Cork, Ireland
+	
+	UI developer: Bernard Valere Simo
+	From: Douala, Cameroon
+/* THANKS */
+	UI Advisor: Patrick McCormark
+	Location: Cork, Ireland
+
+	Content Advisor: Mrs Kelly Murphy
+	Location: Cork, Ireland
+/* SITE */
+	Last update: 2020/08/28
