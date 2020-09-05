@@ -41,7 +41,17 @@ def template_or_json(template=None):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    sPageTitle = '404 Not found - MyWeddingSeatingPlanner.com'
+    sDescription = 'Sorry the page you are requesting does not exist.'
+    objMeta = {
+        'googlebot': 'noindex,nofollow',
+        'description': sDescription,
+        'keywords': 'contact us, wedding, email, contact form',
+        'publisher': 'BahamSoft Ltd',
+        'og:title': sPageTitle,
+        'og:description': sDescription
+    }
+    return render_template('404.html', title=sPageTitle, meta=objMeta), 404
 
 
 @catalog.route('/')
@@ -281,11 +291,11 @@ def results():
         'og:title': sPageTitle,
         'og:description': sDescription
     }
-    numguests = int(session['config']['numguest'])
+    # numguests = int(session['config']['numguest'])
     num_tables = int(session['config']['numtables'])
     table_capacity = int(session['config']['numguestspertable'])
-    # min_known_neighbors = 2
-    min_known_neighbors = int(session['config']['minguestpertable'])
+    min_known_neighbors = 1
+    # min_known_neighbors = int(session['config']['minguestpertable'])
     names = [i['name'] for i in session['guestlist']]
 
     # ensure that nodes with the same acquintance are connected with weight 1
