@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %} {{ title }}{% endblock %}
+{% block body %}
+<section>
+    <div class="container">
+        <p><b> {{ msg.total }} messages so far</b></p>
+        <table class="wsm">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>IP</th>
+                <th>Date</th>
+                <th>User Agent</th>
+                <th>Message</th>
+            </tr>
+            {% for msg in msg.items %}
+            <tr>
+                <td>{{ msg.fullname }} </td>
+                <td>{{ msg.email }} </td>
+                <td>{{ msg.ipaddress }} </td>
+                <td>{{ msg.messagedate.strftime('%c') }} </td>
+                <td>{{ msg.useragent }}</td>
+                <td>{{ msg.message }} </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        {% if msg.has_prev %}
+          <a href="{{ url_for(request.endpoint, page=msg.prev_num) }}">
+            {{"<< Previous Page"}}
+          </a>
+        {% else %}
+          {{"<< Previous Page"}}
+        {% endif %} |
+        {% if msg.has_next %}
+          <a href="{{ url_for(request.endpoint, page=msg.next_num) }}">
+            {{"Next page >>"}}
+          </a>
+        {% else %}
+          {{"Next page >>"}}
+        {% endif %}
+
+    </div>
+</section>
+{% endblock %}

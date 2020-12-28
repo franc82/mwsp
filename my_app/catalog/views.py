@@ -574,3 +574,22 @@ def adminres(page=1):
     num = len(SeatingPlan.query.all())
     return render_template('seatingplans.html', meta=objMeta,
                            seatingplans=res, title=sPageTitle, total=num)
+
+
+@catalog.route('/ct')
+@catalog.route('/ct/<int:page>')
+def getmessages(page=1):
+    sPageTitle = 'Messages - MyWeddingSeatingPlanner.com'
+    sDescription = 'Messages.'
+    objMeta = {
+        'googlebot': 'noindex,nofollow,snippet,archive',
+        'description': 'admin page for seating plans',
+        'keywords': 'seating plans',
+        'publisher': 'BahamSoft Ltd',
+        'og:title': sPageTitle,
+        'og:description': sDescription
+    }
+
+    res = ContactMessage.query.order_by(desc(ContactMessage.id)).paginate(page, 50)
+    return render_template('messages.html', meta=objMeta,
+                           msg=res, title=sPageTitle)

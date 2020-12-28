@@ -1244,3 +1244,7 @@ hr.image { /*dummy content*/
   font-size: 1.4em;
   display: block;
 }
+
+.wsm td, .wsm th{
+padding: 1em;
+}
