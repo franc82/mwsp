@@ -1245,6 +1245,16 @@ hr.image { /*dummy content*/
   display: block;
 }
 
+/*
 .wsm td, .wsm th{
 padding: 1em;
+}
+*/
+table.wsm {
+border-collapse: separate;
+  border-spacing: 50px 0;
+}
+
+table.wsm td {
+  padding: 10px 0;
 }
