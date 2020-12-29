@@ -113,7 +113,7 @@ def contact():
         objMessage = ContactMessage(fullname=message.get('name'),
                                     email=message.get('email'),
                                     message=message.get('message'),
-                                    ipaddress=request.headers.get('X-Forwarded-For', request.remote_addr),
+                                    ipaddress=request.headers.get('X-Real-IP', request.remote_addr),
                                     useragent=request.headers.get('User-Agent')
                                     )
         db.session.add(objMessage)
