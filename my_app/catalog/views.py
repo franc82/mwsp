@@ -110,6 +110,9 @@ def contact():
                       )
 
         success = True
+        for k,v in request.headers.items():
+            print('key {}, val {}'.format(k,v))
+            
         objMessage = ContactMessage(fullname=message.get('name'),
                                     email=message.get('email'),
                                     message=message.get('message'),
